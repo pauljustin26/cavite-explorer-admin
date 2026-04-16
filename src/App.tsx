@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AdminLayout from './layouts/AdminLayout';
-import AddPlace from './pages/AddPlace';
 import Login from './pages/Login'; 
-import Dashboard from './pages/Dashboard'; // <-- Import the Dashboard
+import Dashboard from './pages/Dashboard'; 
+import Locations from './pages/Locations'; // <-- Import the new Locations page
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const token = localStorage.getItem('adminToken');
@@ -14,19 +14,12 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        
-        {/* Public Login Route */}
         <Route path="/login" element={<Login />} />
 
-        {/* Protected Admin Routes inside the Layout */}
         <Route path="/" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
-          
-          {/* Map the root index to the Dashboard! */}
           <Route index element={<Dashboard />} /> 
-          <Route path="places/add" element={<AddPlace />} />
-          
+          <Route path="locations" element={<Locations />} /> 
         </Route>
-
       </Routes>
     </BrowserRouter>
   );
